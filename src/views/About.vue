@@ -4,7 +4,6 @@
     <ul class="container">
       <li class="text">1</li>
       <li class="item">2</li>
-      <li class="item">3</li>
     </ul>
   </div>
 </template>
