@@ -1,18 +1,18 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="course">
+    这里是course
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import adminModel from "@/api/admin.js";
+
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+    }
   },
   methods: {
     getCourse () {

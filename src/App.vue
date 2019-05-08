@@ -1,36 +1,59 @@
 <template>
   <!-- <div id="app" style="border: 1px solid;"> -->
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
+    <mt-tabbar v-model="nowSelected" v-if="this.$route.name !== 'login'">
+      <mt-tab-item id="course">
+        <img slot="icon" src="@/assets/icon-course.png">
+        课表查询
+      </mt-tab-item>
+
+      <mt-tab-item id="grade">
+        <img slot="icon" src="@/assets/icon-grade.png">
+        成绩查询
+      </mt-tab-item>
+
+      <mt-tab-item id="personal">
+        <img slot="icon" src="@/assets/icon-personal.png">
+        个人中心
+      </mt-tab-item>
+    </mt-tabbar>
   </div>
 </template>
 
-<style lang="scss">
-html,body {
-  height: 100%;
+<script>
+import Cookies from "js-cookie";
+
+export default {
+  data () {
+    return {
+      nowSelected: 'course'
+    }
+  },
+  beforeCreate () {
+    const user = Cookies.get('user');
+    if (!user) {
+      this.$router.push('/login');
+    }
+  },
+  watch: {
+    nowSelected (val) {
+      this.$router.push(`/${val}`);
+    }
+  },
+
 }
+</script>
+
+<style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   height: 100%;
   width: 100%;
-  background: rgb(81, 179, 209);
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+  font-size: 24px;
 }
 </style>

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import course from './views/course.vue'
+import login from './views/login.vue'
+import personal from './views/personal.vue'
+import grade from './views/grade.vue'
 
 Vue.use(Router)
 
@@ -8,22 +11,39 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      redirect: '/course'
+    },
+    {
+      path: '/course',
+      name: 'course',
+      component: course,
       meta: {
-        title: '首页'
+        title: '课程查询'
       }
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/grade',
+      name: 'grade',
+      component: grade,
       meta: {
-        title: '关于'
-      },
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+        title: '成绩查询'
+      }
+    },
+    {
+      path: '/personal',
+      name: 'personal',
+      component: personal,
+      meta: {
+        title: '个人中心'
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login,
+      meta: {
+        title: '登录'
+      }
     }
   ]
 })
