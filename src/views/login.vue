@@ -1,18 +1,16 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div>这里是登录页</div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 import adminModel from "@/api/admin.js";
+
+
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  data () {
+    return {
+
+    }
   },
   methods: {
     getCourse () {
@@ -24,8 +22,11 @@ export default {
       });
     },
   },
-  mounted() {
+  mounted () {
     this.getCourse();
   }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>

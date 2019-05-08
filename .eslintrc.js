@@ -1,19 +1,25 @@
 module.exports = {
   root: true,
-  env: {
-    node: true
-  },
   'extends': [
-    'plugin:vue/essential',
-    'eslint:recommended'
+    'plugin:vue/essential'
   ],
   rules: {
-    'no-console': 'off',
+    // allow async-await
+    'generator-star-spacing': 'off',
+    // allow debugger during development
     'no-debugger': 'off',
-    'vue/html-closing-bracket-newline': 'warning',
-    'vue/max-attributes-per-line': 'warning',
-    'vue/multiline-html-element-content-newline': 'warning',
-    'vue/require-prop-types': 'warning'
+    'vue/no-parsing-error': [2, {
+      'x-invalid-end-tag': false
+    }],
+    'no-undef': 'off',
+    'camelcase': 'off',
+    'indent': [2, 2],
+    'semi': 'off',
+    'space-before-function-paren': [0, 'always'],
+    "object-curly-spacing": 'off',
+    "quotes": 'off',
+    "x-invalid-end-tag": 'off'
+    // "eslint-disable-next-line": 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'
