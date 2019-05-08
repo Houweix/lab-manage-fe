@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
 import adminModel from "@/api/admin.js";
 
 export default {
@@ -15,17 +14,10 @@ export default {
     }
   },
   methods: {
-    getCourse () {
-      adminModel.getCourseData().then((res) => {
-        if (res.retcode === 0) {
-          // console.log(res);
-          this.courseData = res.data;
-        }
-      });
-    },
+
   },
   mounted() {
-    this.getCourse();
+
   }
 }
 </script>

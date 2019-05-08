@@ -19,12 +19,13 @@
 
 <script>
 import adminModel from "@/api/admin.js";
-import { Toast } from 'mint-ui';
 import Cookies from "js-cookie";
+import { Notify } from 'vant';
 
 export default {
   data () {
     return {
+      // 登录数据
       identity: 'student',
       username: '100002',
       password: '123123'
@@ -36,7 +37,6 @@ export default {
         adminModel
           .login({ username: this.username, password: this.password, identity: this.identity })
           .then(res => {
-            console.log(res);
 
             if (res.retcode === 0) {
               if (!Cookies.get("user")) {
@@ -47,23 +47,29 @@ export default {
                 );
               }
 
-              Toast({
-                message: '登录成功！'
+              Notify({
+                message: '登录成功',
+                duration: 4000,
+                background: '#07c160'
               });
 
               setTimeout(() => {
                 this.$router.push('/');
-              }, 1000);
+              }, 600);
             } else {
 
-              Toast({
-                message: '登录失败，检查后重试！'
+              Notify({
+                message: '登录失败，请核对后重试',
+                duration: 2000,
+                background: 'rgb(255, 68, 68)'
               });
             }
           })
       } else {
-        Toast({
-          message: '请检查后重试！'
+        Notify({
+          message: '请核对后重试',
+          duration: 2000,
+          background: 'rgb(255, 68, 68)'
         });
       }
     }
@@ -77,6 +83,7 @@ export default {
 
 <style lang="scss" scoped>
 .login {
+  background: #f2f3f5;
   position: relative;
   margin: 0.5rem 0 1rem 0;
   background-color: #fff;
@@ -110,7 +117,7 @@ export default {
       & input {
         padding: 8px;
         border: none;
-        border-bottom: 2px solid #694ed6;
+        border-bottom: 2px solid #1989fa;
         margin: 10px 0;
         transition: 0.25s all;
         &:focus {
@@ -126,7 +133,7 @@ export default {
 
   &_btn {
     border: none;
-    background: #694ed6;
+    background: #1989fa;
 
     cursor: pointer;
     border-radius: 3px;

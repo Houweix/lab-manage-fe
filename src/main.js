@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
-import Mint from 'mint-ui';
-import 'mint-ui/lib/style.css';
 
+import Vant from 'vant';
+import 'vant/lib/index.css';
 import Cookies from 'js-cookie';
 
-Vue.use(Mint);
+Vue.use(Vant);
 
 Vue.config.productionTip = false;
 
@@ -24,19 +24,18 @@ router.beforeEach((to, from, next) => {
     document.title = `实验室管理系统 - ${to.meta.title}`;
   }
 
-  if (to.path === '/login') {
-    if (coo) {
-      next('/');
-      return;
+  if (coo) {
+    //如果有就直接到首页咯
+    next();
+  } else {
+    if (to.path === '/login') {
+      //如果是登录页面路径，就直接next()
+      next();
+    } else {
+      //不然就跳转到登录；
+      next('/login');
     }
   }
 
-  if (!coo) {
-    next('/login');
-    return;
-  }
-
-  //  这里如果检测不到cookie就返回登录
-  // if ()
-  next();
+  // next();
 });

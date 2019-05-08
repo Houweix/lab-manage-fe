@@ -2,22 +2,11 @@
   <!-- <div id="app" style="border: 1px solid;"> -->
   <div id="app">
     <router-view/>
-    <mt-tabbar v-model="nowSelected" v-if="this.$route.name !== 'login'">
-      <mt-tab-item id="course">
-        <img slot="icon" src="@/assets/icon-course.png">
-        课表查询
-      </mt-tab-item>
-
-      <mt-tab-item id="grade">
-        <img slot="icon" src="@/assets/icon-grade.png">
-        成绩查询
-      </mt-tab-item>
-
-      <mt-tab-item id="personal">
-        <img slot="icon" src="@/assets/icon-personal.png">
-        个人中心
-      </mt-tab-item>
-    </mt-tabbar>
+    <van-tabbar v-model="active" v-if="this.$route.name !== 'login'">
+      <van-tabbar-item icon="home-o" to="/course">课表查询</van-tabbar-item>
+      <van-tabbar-item icon="search" to="/grade">成绩查询</van-tabbar-item>
+      <van-tabbar-item icon="friends-o" to="/personal">个人中心</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
@@ -27,7 +16,8 @@ import Cookies from "js-cookie";
 export default {
   data () {
     return {
-      nowSelected: 'course'
+      active: 0,
+      map: ['course', 'grade', 'personal']
     }
   },
   beforeCreate () {
@@ -36,24 +26,22 @@ export default {
       this.$router.push('/login');
     }
   },
-  watch: {
-    nowSelected (val) {
-      this.$router.push(`/${val}`);
+  methods: {
+    handleSwitch (val) {
+      this.$router.push(`/${this.map[val]}`);
     }
-  },
+  }
 
 }
 </script>
 
 <style lang="scss">
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   text-align: center;
-  color: #2c3e50;
   height: 100%;
   width: 100%;
   font-size: 24px;
 }
+
 </style>
