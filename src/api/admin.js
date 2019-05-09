@@ -32,6 +32,38 @@ export default {
     });
   },
 
+  //  根据班级名称查询该班级的课程
+  getCourseByClass: ({
+    name
+  }) => {
+    const data = {
+      className: name
+    };
+
+    return axios.request({
+      url: '/class/getCourseByClass',
+      data,
+      method: 'post'
+    })
+  },
+  // 获取所有课程
+  getCourseData: () => {
+    const data = {};
+
+    return axios.request({
+      url: '/course/getAllData',
+      data,
+      method: 'get'
+    })
+  },
+  // 获取全部实验室
+  getLab: () => {
+    return axios.request({
+      url: '/lab/getLabData',
+      method: 'get'
+    })
+  },
+
   //  !! 公告------------------------
   getPost: () => {
     return axios.request({

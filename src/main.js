@@ -6,13 +6,15 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 import Cookies from 'js-cookie';
 import VueBus from 'vue-bus';
+import vueg from 'vueg';
+
+import '@/assets/css/reset.css';
 
 Vue.use(Vant);
 Vue.use(VueBus);
+Vue.use(vueg, router, {duration: 0.2}); // 传入实例化后的router, Options为可选的插件配置
 
 Vue.config.productionTip = false;
-
-import '@/assets/css/reset.css';
 
 new Vue({
   router,

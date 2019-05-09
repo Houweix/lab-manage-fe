@@ -6,9 +6,25 @@
     <div class="name" v-text="name"></div>
 
     <van-cell-group style="margin-top: 30px;">
-      <van-field style="text-align: left;" clearable v-model="userForm.password1" type="password" label="原密码" placeholder="请输入密码"/>
-      <van-field style="text-align: left;" clearable v-model="userForm.password2" type="password" label="新密码" placeholder="请输入密码"/>
-      <van-field style="text-align: left;" clearable
+      <van-field
+        style="text-align: left;"
+        clearable
+        v-model="userForm.password1"
+        type="password"
+        label="原密码"
+        placeholder="请输入密码"
+      />
+      <van-field
+        style="text-align: left;"
+        clearable
+        v-model="userForm.password2"
+        type="password"
+        label="新密码"
+        placeholder="请输入密码"
+      />
+      <van-field
+        style="text-align: left;"
+        clearable
         v-model="userForm.password2s"
         @change="handleCheck"
         type="password"
@@ -136,6 +152,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.personal-container {
+  background-color: #f2f3f5;
+  height: 100%;
+}
 .login_image {
   max-height: 100%;
   max-width: 100%;

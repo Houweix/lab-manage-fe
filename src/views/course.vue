@@ -9,10 +9,18 @@
     />
 
     <div class="text">课程列表</div>
+
     <van-collapse v-model="activeName" accordion style="text-align: left;">
-      <van-collapse-item title="有赞微商城" name="1">提供多样店铺模板，快速搭建网上商城</van-collapse-item>
-      <van-collapse-item title="有赞零售" name="2">网店吸粉获客、会员分层营销、一机多种收款，告别经营低效和客户流失</van-collapse-item>
-      <van-collapse-item title="有赞美业" name="3">线上拓客，随时预约，贴心顺手的开单收银</van-collapse-item>
+      <van-collapse-item :title="item.name" :name="idx" v-for="(item,idx) in showCourse" :key="idx">
+        <van-cell title="上课日期" style="text-align: left;" :label="item.date"/>
+        <van-cell
+          title="上课时间"
+          style="text-align: left;"
+          :label="item.start_time+'-'+item.end_time+'时'"
+        />
+        <van-cell title="上课周数" style="text-align: left;" :label="item.week+'周'"/>
+        <van-cell title="上课地点" style="text-align: left;" :label="item.lab"/>
+      </van-collapse-item>
     </van-collapse>
   </div>
 </template>
@@ -20,7 +28,10 @@
 <script>
 import adminModel from "@/api/admin.js";
 import { NoticeBar } from 'vant';
+import { Cell, CellGroup } from 'vant';
 import { Collapse, CollapseItem } from 'vant';
+import Cookies from "js-cookie";
+
 
 export default {
   name: 'course',
@@ -29,7 +40,14 @@ export default {
       post: [],
       nowPost: {},
       //  课程展示当前激活
-      activeName: ''
+      activeName: '',
+
+      //  当前班级的课程
+      nowCourse: '',
+      // 所有的课程信息
+      courseData: '',
+      //  当前实验室信息
+      labData: ''
     }
   },
   methods: {
@@ -50,16 +68,57 @@ export default {
       this.$router.push(`/post/${this.nowPost.id}`)
     },
     //  获取该学生的课程
-    getCourseByStudent () {
-
+    getCourseByClass () {
+      const user = JSON.parse(Cookies.get('user')).class;
+      adminModel.getCourseByClass({ name: user }).then((res) => {
+        if (res.retcode === 0) {
+          this.nowCourse = res.data;
+        }
+      });
+    },
+    //  获取所有的课程
+    getCourseData () {
+      adminModel.getCourseData().then((res) => {
+        if (res.retcode === 0) {
+          this.courseData = res.data;
+        }
+      });
+    },
+    // 获取所有实验室
+    getLab () {
+      adminModel.getLab().then((res) => {
+        if (res.retcode === 0) {
+          this.labData = res.data;
+        }
+      });
+    },
+    getFilterCourse (courseName) {
+      return this.courseData.find((elem) => elem.name === courseName);
     }
   },
   mounted () {
     // 获取post
     this.getPost();
-    this.getCourseByStudent();
+    this.getCourseByClass();
+    this.getCourseData();
+    this.getLab();
+  },
+  computed: {
+    //  最终展示给用户的课程list
+    showCourse () {
+      const arr = [];
+      if (this.courseData[0] && this.nowCourse[0] && this.labData[0]) {
+        this.nowCourse.forEach(elem => {
 
-  }
+          const obj = JSON.parse(JSON.stringify(this.getFilterCourse(elem.course)));
+          obj.lab = this.labData.find(elem => elem.id === obj.lab_id).name;
+
+          arr.push(obj);
+        })
+      }
+      return arr;
+    }
+  },
 }
 </script>
 

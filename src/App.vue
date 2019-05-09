@@ -1,7 +1,7 @@
 <template>
   <!-- <div id="app" style="border: 1px solid;"> -->
   <div id="app">
-    <router-view/>
+    <router-view v-transition/>
     <van-tabbar v-model="active" v-if="this.$route.name !== 'login' && this.$route.name !== 'post'">
       <van-tabbar-item icon="home-o" to="/course">课表查询</van-tabbar-item>
       <van-tabbar-item icon="search" to="/grade">成绩查询</van-tabbar-item>
