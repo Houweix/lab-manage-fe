@@ -26,9 +26,6 @@ export default {
     if (!user) {
       this.$router.push('/login');
     }
-
-    //  重置tab
-    this.$bus.on('reset', this.reset);
   },
   methods: {
     handleSwitch (val) {
@@ -40,7 +37,19 @@ export default {
     }
   },
   mounted () {
-    this.active = 0;
+
+    //  重置tab
+    this.$bus.on('reset', this.reset);
+
+    if (this.$route.name === 'course') {
+      this.active = 0;
+    } else if (this.$route.name === 'grade') {
+      this.active = 1;
+    } else if (this.$route.name === 'personal') {
+      this.active = 2;
+    } else {
+      this.active = 0;
+    }
   }
 
 }

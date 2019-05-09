@@ -15,3 +15,11 @@ button,input,select,textarea{font-size:100%;}
 table{border-collapse:collapse;border-spacing:0;}
 .clear{clear: both;float: none;height: 0;overflow: hidden;}
 html .hide{display:none;}
+.text {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(69, 90, 100, 0.6);
+  padding: 15px 15px 15px;
+  text-align: left;
+}
