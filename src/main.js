@@ -5,8 +5,10 @@ import router from './router';
 import Vant from 'vant';
 import 'vant/lib/index.css';
 import Cookies from 'js-cookie';
+import VueBus from 'vue-bus';
 
 Vue.use(Vant);
+Vue.use(VueBus);
 
 Vue.config.productionTip = false;
 

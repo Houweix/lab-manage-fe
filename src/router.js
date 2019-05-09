@@ -4,6 +4,7 @@ import course from './views/course.vue'
 import login from './views/login.vue'
 import personal from './views/personal.vue'
 import grade from './views/grade.vue'
+import post from './views/post.vue'
 
 Vue.use(Router)
 
@@ -44,6 +45,14 @@ export default new Router({
       meta: {
         title: '登录'
       }
-    }
+    },
+    {
+      path: '/post/:id',
+      name: 'post',
+      component: post,
+      meta: {
+        title: '公告详情'
+      }
+    },
   ]
 })

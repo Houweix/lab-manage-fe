@@ -6,9 +6,9 @@
     <div class="name" v-text="name"></div>
 
     <van-cell-group style="margin-top: 30px;">
-      <van-field v-model="userForm.password1" type="password" label="原密码" placeholder="请输入密码"/>
-      <van-field v-model="userForm.password2" type="password" label="新密码" placeholder="请输入密码"/>
-      <van-field
+      <van-field style="text-align: left;" v-model="userForm.password1" type="password" label="原密码" placeholder="请输入密码"/>
+      <van-field style="text-align: left;" v-model="userForm.password2" type="password" label="新密码" placeholder="请输入密码"/>
+      <van-field style="text-align: left;"
         v-model="userForm.password2s"
         @change="handleCheck"
         type="password"
@@ -128,7 +128,7 @@ export default {
   },
   computed: {
     checkPass () {
-      return this.userForm.password2 === this.userForm.password2s;
+      return (this.userForm.password2 === this.userForm.password2s) && this.userForm.password1;
     }
   },
 

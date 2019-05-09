@@ -53,6 +53,8 @@ export default {
                 background: '#07c160'
               });
 
+              this.$bus.emit('reset');
+
               setTimeout(() => {
                 this.$router.push('/');
               }, 600);
