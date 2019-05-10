@@ -63,6 +63,18 @@ export default {
       method: 'get'
     })
   },
+  // 获取成绩
+  getGrade: ({ name }) => {
+    const data = {
+      studentName: name
+    };
+
+    return axios.request({
+      url: '/grade/getGradeByName',
+      data,
+      method: 'post'
+    })
+  },
 
   //  !! 公告------------------------
   getPost: () => {

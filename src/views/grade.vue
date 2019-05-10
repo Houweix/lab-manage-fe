@@ -1,6 +1,17 @@
 <template>
   <div class="grade">
-    <van-search placeholder="请输入课程名称" v-model="value"/>
+    <van-search placeholder="请输入课程名称" v-model="searchVal"/>
+    <div class="text">课程成绩列表</div>
+    <van-cell-group>
+      <van-cell
+        :title="item.course"
+        :name="idx"
+        v-for="(item,idx) in gradeData"
+        :key="idx"
+        style="text-align: left;"
+        :value="item.grade_val+'分'"
+      />
+    </van-cell-group>
   </div>
 </template>
 
@@ -16,18 +27,31 @@ export default {
   name: 'grade',
 
   data () {
-    return {}
+    return {
+      //  搜索
+      searchVal: '',
+      // 成绩数据
+      gradeData: ''
+    }
   },
   methods: {
-    name () {
+    getGrade () {
+      const user = JSON.parse(Cookies.get('user')).name;
+
+      adminModel.getGrade({ name: user }).then((res) => {
+        if (res.retcode === 0) {
+          this.gradeData = res.data;
+        }
+      });
 
     }
   },
+  // todo 筛选
   computed: {
 
   },
   mounted () {
-    ;
+    this.getGrade();
   },
 
 }
