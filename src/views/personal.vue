@@ -80,7 +80,7 @@ export default {
 
         Notify({
           message: '退出登录成功',
-          duration: 1000,
+          duration: 2000,
           background: '#07c160'
         });
 
@@ -91,13 +91,13 @@ export default {
     changePassword () {
       if (this.checkPass) {
         adminModel.editPass({ editForm: this.userForm }).then((res) => {
-          if (res.retcode === 0) {
+          if (res.retcode === 2) {
             Notify({
               message: '原始密码不正确，核对重试',
               duration: 2000,
               background: 'rgb(255, 68, 68)'
             });
-          } else if (res.retcode === 2) {
+          } else if (res.retcode === 0) {
             Notify({
               message: '修改成功!',
               duration: 4000,
