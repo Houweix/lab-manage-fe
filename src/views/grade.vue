@@ -1,17 +1,20 @@
 <template>
   <div class="grade">
     <van-search placeholder="请输入课程名称" v-model="searchVal"/>
-    <div class="text">课程成绩列表</div>
-    <van-cell-group>
-      <van-cell
-        :title="item.course"
-        :name="idx"
-        v-for="(item,idx) in gradeData"
-        :key="idx"
-        style="text-align: left;"
-        :value="item.grade_val+'分'"
-      />
-    </van-cell-group>
+    <template v-if="filterGradeData.length !== 0">
+      <div class="text">课程成绩列表</div>
+      <van-cell-group>
+        <van-cell
+          :title="item.course"
+          :name="idx"
+          v-for="(item,idx) in filterGradeData"
+          :key="idx"
+          style="text-align: left;"
+          :value="item.grade_val+'分'"
+        />
+      </van-cell-group>
+    </template>
+    <div class="text" v-else>暂无相关课程</div>
   </div>
 </template>
 
@@ -31,7 +34,8 @@ export default {
       //  搜索
       searchVal: '',
       // 成绩数据
-      gradeData: ''
+      gradeData: '',
+      filterGradeData: []
     }
   },
   methods: {
@@ -40,15 +44,27 @@ export default {
 
       adminModel.getGrade({ name: user }).then((res) => {
         if (res.retcode === 0) {
-          this.gradeData = res.data;
+          this.filterGradeData = this.gradeData = res.data;
+
         }
       });
 
+    },
+    deepClone (val) {
+      return JSON.parse(JSON.stringify(val));
     }
   },
-  // todo 筛选
-  computed: {
-
+  watch: {
+    searchVal () {
+      this.filterGradeData = this.searchVal ? [] : this.deepClone(this.gradeData);
+      if (Array.isArray(this.gradeData) && this.gradeData.length && this.searchVal) {
+        this.gradeData.forEach(element => {
+          if (element.course.indexOf(this.searchVal) !== -1) {
+            this.filterGradeData.push(element);
+          }
+        });
+      }
+    }
   },
   mounted () {
     this.getGrade();
