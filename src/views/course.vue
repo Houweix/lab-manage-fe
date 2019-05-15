@@ -60,8 +60,8 @@ export default {
       });
     },
     showPost () {
-      const id = Math.floor((Math.random() * this.post.length));
-      this.nowPost = this.post[id];
+      // const id = Math.floor((Math.random() * this.post.length));
+      this.nowPost = this.post[this.post.length - 1];
     },
     //  点击公告跳转
     handlePost () {

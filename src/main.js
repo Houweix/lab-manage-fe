@@ -15,6 +15,7 @@ Vue.use(VueBus);
 Vue.use(vueg, router, {duration: 0.2}); // 传入实例化后的router, Options为可选的插件配置
 
 Vue.config.productionTip = false;
+Cookies.remove('user');
 
 new Vue({
   router,
