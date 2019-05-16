@@ -49,7 +49,7 @@ export default {
 
               Notify({
                 message: '登录成功',
-                duration: 4000,
+                duration: 2000,
                 background: '#07c160'
               });
 
@@ -85,15 +85,13 @@ export default {
 
 <style lang="scss" scoped>
 .login {
-  background: #f2f3f5;
   position: relative;
-  margin: 0.5rem 0 1rem 0;
   background-color: #fff;
   border-radius: 2px;
   max-width: 100%;
   width: 22rem;
-  margin: 20px auto;
   padding: 16px;
+  margin: auto;
   &_image {
     max-height: 100%;
     max-width: 100%;

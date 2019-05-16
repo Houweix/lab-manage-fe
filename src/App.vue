@@ -66,5 +66,7 @@ html {
   height: 100%;
   width: 100%;
   font-size: 24px;
+  background-color: #fff !important;
+
 }
 </style>
