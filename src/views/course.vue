@@ -20,6 +20,7 @@
         />
         <van-cell title="上课周数" style="text-align: left;" :label="item.week+'周'"/>
         <van-cell title="上课地点" style="text-align: left;" :label="item.lab"/>
+        <van-cell title="任课教师" style="text-align: left;" :label="item.teacher"/>
       </van-collapse-item>
     </van-collapse>
   </div>
@@ -47,10 +48,20 @@ export default {
       // 所有的课程信息
       courseData: '',
       //  当前实验室信息
-      labData: ''
+      labData: '',
+      //  教师信息
+      teacherData: []
     }
   },
   methods: {
+    //  教师信息
+    getTeacherData () {
+      adminModel.getAllData({ role: 'teacher' }).then((res) => {
+        if (res.retcode === 0) {
+          this.teacherData = res.data;
+        }
+      });
+    },
     getPost () {
       adminModel.getPost().then((res) => {
         if (res.retcode === 0) {
@@ -94,6 +105,10 @@ export default {
     },
     getFilterCourse (courseName) {
       return this.courseData.find((elem) => elem.name === courseName);
+    },
+    //  根据courseid获取教师姓名
+    getTeacherByCourse(name) {
+      return this.teacherData.find(elem => elem.course_id === name);
     }
   },
   mounted () {
@@ -102,16 +117,19 @@ export default {
     this.getCourseByClass();
     this.getCourseData();
     this.getLab();
+    this.getTeacherData();
   },
   computed: {
     //  最终展示给用户的课程list
     showCourse () {
       const arr = [];
-      if (this.courseData[0] && this.nowCourse[0] && this.labData[0]) {
+      if (this.courseData[0] && this.nowCourse[0] && this.labData[0]  && this.teacherData[0]) {
         this.nowCourse.forEach(elem => {
 
           const obj = JSON.parse(JSON.stringify(this.getFilterCourse(elem.course)));
           obj.lab = this.labData.find(elem => elem.id === obj.lab_id).name;
+
+          obj.teacher = this.getTeacherByCourse(obj.name).name;
 
           arr.push(obj);
         })

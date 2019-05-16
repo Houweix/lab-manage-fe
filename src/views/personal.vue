@@ -160,7 +160,6 @@ export default {
   max-height: 100%;
   max-width: 100%;
   text-align: center;
-  margin: 16px;
   & img {
     height: 150px;
     width: 150px;

@@ -75,6 +75,19 @@ export default {
       method: 'post'
     })
   },
+  //  获取各种用户的信息
+  getAllData: ({
+    role
+  }) => {
+    const params = {
+      role: role
+    }
+    return axios.request({
+      url: '/admin/getAllData',
+      params,
+      method: 'get'
+    })
+  },
 
   //  !! 公告------------------------
   getPost: () => {
