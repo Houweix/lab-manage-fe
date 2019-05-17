@@ -105,10 +105,6 @@ export default {
     },
     getFilterCourse (courseName) {
       return this.courseData.find((elem) => elem.name === courseName);
-    },
-    //  根据courseid获取教师姓名
-    getTeacherByCourse(name) {
-      return this.teacherData.find(elem => elem.course_id === name);
     }
   },
   mounted () {
@@ -127,9 +123,10 @@ export default {
         this.nowCourse.forEach(elem => {
 
           const obj = JSON.parse(JSON.stringify(this.getFilterCourse(elem.course)));
-          obj.lab = this.labData.find(elem => elem.id === obj.lab_id).name;
+          obj.lab = this.labData.find(elem => elem.id === obj.lab_id) ? this.labData.find(elem => elem.id === obj.lab_id).name:'未安排';
 
-          obj.teacher = this.getTeacherByCourse(obj.name).name;
+          // obj.teacher = this.getTeacherByCourse(obj.name).name;
+          obj.teacher = this.teacherData.find(elem => elem.course_id === obj.name) ? this.teacherData.find(elem => elem.course_id === obj.name).name :'未安排';
 
           arr.push(obj);
         })
